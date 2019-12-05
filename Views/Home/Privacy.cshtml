@@ -1,0 +1,58 @@
+﻿@using E_Commerce.Models
+
+@model ViewModel
+<div class="container">
+    <div class="row">
+        <div class="col"><a href="/">DashBoard</a></div>
+            <div class="col">Products</div>
+            <div class="col"><a href="Orders">Orders</a></div>
+            <div class="col"><a href="Customer">Customers</a></div>
+            <div class="col"><a href="#">Settings</a></div>
+        <div>
+    </div>
+
+<div class="row">
+    <div class="col col-4">
+
+
+        <div>
+        <h4>Add a new Product</h4>
+        <form asp-action="AddProduct" asp-controller="Home" method="post">
+            <span asp-validation-for="NewProduct.Name"></span>
+            <label asp-for="NewProduct.Name"></label>
+            <input type="text" asp-for="NewProduct.Name">
+
+            <span asp-validation-for="NewProduct.Img"></span>
+            <label asp-for="NewProduct.Img"></label>
+            <input type="text" asp-for="NewProduct.Img">
+
+            <span asp-validation-for="NewProduct.Desc"></span>
+            <label asp-for="NewProduct.Desc"></label>
+            <textarea name="NewProduct.Desc" id="" cols="20" rows="2"></textarea>
+
+            <span asp-validation-for="NewProduct.Qty"></span>
+            <label asp-for="NewProduct.Qty"></label>
+            <input type="text" asp-for="NewProduct.Qty">
+
+            <input value="Add Product" type="submit"> 
+        </form>
+    </div>
+</div>
+    <div class="col col-8">
+            @foreach (Product a in @Model.AllProducts)
+            {         
+            <div style="display:inline-block;">  
+               <div class="card" style="width: 15rem; ">
+                    <img src="@a.Img" class="card-img-top" style="width :13rem; heigh: 10rem" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@a.Name</h5>
+                        <p class="card-text">@a.Desc</p>
+                        <p class="card-text">( @a.Qty left )</p>
+                    </div>
+                </div>
+            </div> 
+            }
+           
+    </div>
+</div>
+    

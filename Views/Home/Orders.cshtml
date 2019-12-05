@@ -1,0 +1,79 @@
+﻿@using E_Commerce.Models
+
+@model ViewModel
+<div class="container">
+    <div class="row">
+        <div class="col"><a href="/">DashBoard</a></div>
+            <div class="col"><a href="Products">Products</a></div>
+            <div class="col">Orders</div>
+            <div class="col"><a href="Customer">Customers</a></div>
+            <div class="col"><a href="#">Settings</a></div>
+        <div>
+    </div>
+
+<div class="row">
+    <div class="col col-4">
+
+
+        <div>
+        <h4>Add a new Order</h4>
+        <form asp-action="AddOrder" asp-controller="Home" method="post">
+            <span asp-validation-for="NewCustomer.Name"></span>
+            <label asp-for="NewCustomer.Name"></label>
+
+            <select asp-for="NewOrder.CustomerId" >
+            @foreach (Customer a in @Model.AllCustomers)
+                {         
+                    <option value="@a.CustomerId">@a.Name</option>
+                }
+            </select>
+            
+
+            <span asp-validation-for="NewOrder.SoldQty"></span>
+            <label asp-for="NewOrder.SoldQty"></label>
+            <input type="text" asp-for="NewOrder.SoldQty">
+
+            <span asp-validation-for="NewOrder.ProductId"></span>
+            <label asp-for="NewOrder.ProductId"></label>
+
+            <select asp-for="NewOrder.ProductId" >
+                @foreach (Product a in @Model.AllProducts)
+                    {         
+                        <option value="@a.ProductId">@a.Name</option>
+                    }
+            </select>
+
+            <input value="Add Order" type="submit"> 
+        </form>
+    </div>
+</div>
+    <div class="col col-8">
+        <table class="table">
+            <tr>
+                <td>Customer Name</td>
+                <td>Product</td>
+                <td>Qty</td>
+                <td>Date</td>
+            </tr>
+ 
+        @foreach(var a in @ViewBag.AllOrd){
+        
+            @foreach(var b in @a.OrdersCustomer)
+            {
+                
+                
+            <tr>
+                <td>@a.Name</td>
+                <td>@b.Product.Name</td>
+                <td>@b.SoldQty</td>
+                <td>@b.CreatedAt</td>
+            </tr>
+            }        
+        }
+
+        </table>
+        <h1>@Model.AllOrders</h1>
+           
+    </div>
+</div>
+    

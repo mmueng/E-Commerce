@@ -1,0 +1,43 @@
+﻿@using E_Commerce.Models
+
+@model ViewModel
+<div class="container">
+    <div class="text-center">
+   
+        <div class="row">
+            <div class="col"><a href="/">DashBoard</a></div>
+            <div class="col"><a href="Products">Products</a></div>
+            <div class="col"><a href="Orders">Orders</a></div>
+            <div class="col">Customers</div>
+            <div class="col"><a href="#">Settings</a></div>
+        </div>
+    </div>
+
+    <div>
+        <h1>Add a new Customer</h1>
+        <form asp-action="AddCustomer" asp-controller="Home" method="post">
+            <span asp-validation-for="NewCustomer.Name"></span>
+            <label asp-for="NewCustomer.Name"></label>
+            <input type="text" asp-for="NewCustomer.Name">
+
+            <input value="Add Customr" type="submit"> 
+        </form>
+    </div>
+
+
+    <table class="table">
+        <tr>
+            <td>Customer Name</td>
+            <td>Created At</td>
+            <td>Action</td>
+        </tr>
+        @foreach( var a in @Model.AllCustomers)
+        {
+            <tr>
+                <td>@a.Name</td>
+                <td>@a.CreatedAt</td>
+                <td><a href="Delete/@a.CustomerId">Delete</a></td>
+            </tr>
+        }
+    </table> 
+<div>
